@@ -33,3 +33,10 @@ data/candidates.json
 *.egg-info/
 dist/
 build/
+
+# Ignore Python bytecode
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
