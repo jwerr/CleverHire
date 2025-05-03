@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>HireSync</title>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+    
+
+  </head>
+  <body>
+    <div class="container">
+      <!-- Sidebar -->
+      <div class="sidebar">
+        <div class="sidebar-header">
+          <a href="#" class="logo">
+            <i class="fas fa-users"></i>
+            <span>HireSync</span>
+          </a>
+        </div>
+        <div class="sidebar-menu">
+          <a class="menu-item" data-section="dashboard">
+            <i class="fas fa-home"></i>
+            <span>Dashboard</span>
+          </a>
+          <a class="menu-item" data-section="candidates">
+            <i class="fas fa-users"></i>
+            <span>Candidates</span>
+          </a>
+          <a class="menu-item" data-section="resume-upload">
+            <i class="fas fa-cog"></i>
+            <span>Resume Upload</span>
+          </a>
+        </div>
+      </div>
+
+      <!-- Main Content -->
+      <div class="main-content">
+        <!-- Dashboard Section (Default Visible) -->
+        <!-- Dashboard Section (Default Visible) -->
+<div id="dashboard-section" class="content-section">
+  
+
+  <div class="header">
+    <h1 class="page-title">Dashboard</h1>
+  </div>
+  <div class="stats-container">
+    <div class="stat-card">
+      <div class="stat-header">
+        <span>Total Candidates</span>
+        <div class="stat-icon blue">
+          <i class="fas fa-users"></i>
+        </div>
+      </div>
+      <div class="stat-value">0</div>
+    </div>
+
+    <div class="stat-card">
+      <div class="stat-header">
+        <span>Highest Score</span>
+        <div class="stat-icon green">
+          <i class="fas fa-user-check"></i>
+        </div>
+      </div>
+      <div class="stat-value">0</div>
+    </div>
+
+    <div class="stat-card">
+      <div class="stat-header">
+        <span>Shortlisted</span>
+        <div class="stat-icon purple">
+          <i class="fas fa-check-circle"></i>
+        </div>
+      </div>
+      <div class="stat-value" id="shortlistedCount">0</div>
+    </div>
+
+    <div class="stat-card">
+      <div class="stat-header">
+        <span>Rejected</span>
+        <div class="stat-icon red">
+          <i class="fas fa-times-circle"></i>
+        </div>
+      </div>
+      <div class="stat-value" id="rejectedCount">0</div>
+    </div>
+
+    <div class="stat-card">
+      <div class="stat-header">
+        <span>Latest Application</span>
+        <div class="stat-icon gray">
+          <i class="fas fa-calendar-day"></i>
+        </div>
+      </div>
+      <div class="stat-value" id="latestDate">N/A</div>
+    </div>
+
+    <div class="stat-card">
+      <div class="stat-header">
+        <span>Avg. Score</span>
+        <div class="stat-icon yellow">
+          <i class="fas fa-chart-line"></i>
+        </div>
+      </div>
+      <div class="stat-value" id="averageScore">0</div>
+    </div>
+    <canvas id="statusChart" width="400" height="250" style="margin-top: 30px;"></canvas>
+  </div>
+  
+</div>
+
+
+        <!-- Candidates Section -->
+        <div id="candidates-section" class="content-section">
+          <div class="header candidates-header">
+            <h1 class="page-title">Candidates</h1>
+            <div class="search-bar">
+              <input
+                type="text"
+                id="candidateSearch"
+                placeholder="🔍 Search by name or score..."
+              />
+            </div>
+          </div>
+          
+          
+          <div class="tabs">
+            
+            <div class="tab-content active" id="candidates-tab">
+              <table class="data-table">
+                <thead>
+                  <tr>
+                    <th>Name</th>
+                    <th>Match Score</th>
+                    <th>Applied On</th>
+                    <th>Status</th>
+                    <th>Actions</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <!-- Rows inserted by script.js -->
+                </tbody>
+              </table>
+            </div>
+          </div>
+          
+        </div>
+
+        <!-- Resume Upload Section -->
+        <div id="resume-upload-section" class="content-section">
+          <div class="header">
+            <h1 class="page-title">Resume Upload</h1>
+          </div>
+          <h3>Upload your Resume</h3>
+          <div class="file-upload" id="fileUpload">
+            <i class="fas fa-cloud-upload-alt" id="uploadIcon"></i>
+            <div class="file-upload-text" id="uploadText">
+              Drag & Drop or <span>Browse</span>
+            </div>
+            <div class="file-upload-hint" id="uploadHint">
+              Supported formats: PDF, DOCX
+            </div>
+            <input
+              type="file"
+              class="file-input"
+              accept=".pdf,.docx"
+              id="fileInput"
+            />
+            <div class="file-upload-preview" id="filePreview" style="display: none">
+              <p id="fileName"></p>
+              <button id="removeFile">Remove</button>
+            </div>
+          </div>
+          <hr />
+          <h3 class="jd-heading">Upload Job Description</h3>
+          <div class="jd-container">
+            <textarea
+              id="jd"
+              class="jd-input"
+              placeholder="Job Description here"
+            ></textarea>
+          </div>
+          <div class="btn-container">
+            <button class="upload-btn" id="uploadButton" onclick="uploadResume()">Upload</button>
+          </div>
+
+          <div class="upload-info-text">
+            <ul>
+              <li>Upload the candidate's resume and the job description.</li>
+              <li>The system will analyze and calculate a match score.</li>
+              <li>Use the score to evaluate compatibility.</li>
+            </ul>
+          </div>
+
+          <div id="loadingSpinner" style="display: none;">
+            <div class="spinner"></div>
+            <p>Uploading and processing resume...</p>
+          </div>
+
+          <div id="statusMessage" style="display: none;"></div>
+        </div>
+      </div>
+      
+    </div>
+    <!-- AI Assistant Chat Button -->
+    <div id="chat-toggle" onclick="toggleChat()">
+      💬 Ask Assistant
+    </div>
+
+    <!-- Chat Window -->
+    <div id="chat-box">
+      <div id="chat-header">AI Assistant</div>
+      <div id="chat-messages"></div>
+        <input id="chat-input" type="text" placeholder="Ask something..." onkeydown="handleChat(event)">
+    </div>
+
+
+    <!-- Resume Viewer Modal -->
+    <div id="resumeModal" class="modal">
+      <div class="modal-content">
+        <span class="close" onclick="closeResumeModal()">&times;</span>
+        <iframe id="resumeIframe" style="width: 100%; height: 90vh;" frameborder="0"></iframe>
+      </div>
+    </div>
+    
+
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+    <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.6.2"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+
+  </body>
+</html>

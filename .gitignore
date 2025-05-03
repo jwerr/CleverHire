@@ -1,0 +1,35 @@
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Virtual environment
+venv/
+ENV/
+env/
+.venv/
+
+# VS Code / PyCharm config
+.vscode/
+.idea/
+
+# Environment variable files
+.env
+
+# Logs and local data
+*.log
+*.db
+*.sqlite3
+
+# System files
+.DS_Store
+Thumbs.db
+
+# Uploads and parsed resumes
+uploads/
+data/candidates.json
+
+# Python packaging artifacts
+*.egg-info/
+dist/
+build/
