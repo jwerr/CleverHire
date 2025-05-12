@@ -5,7 +5,7 @@ The platform analyzes the job description (JD) and checks for relevant keywords 
 
 ---
 
-## 🚀 Features
+## Features
 
 * AI-based Resume Matching using Cohere API
 * Real-time match score calculation
@@ -17,7 +17,7 @@ The platform analyzes the job description (JD) and checks for relevant keywords 
 
 ---
 
-## 🛠️ Tech Stack
+## Tech Stack
 
 ### **Frontend:**
 
@@ -36,7 +36,7 @@ The platform analyzes the job description (JD) and checks for relevant keywords 
 
 ---
 
-## 📥 Setup Instructions
+## Setup Instructions
 
 1. **Clone the repository**
 
@@ -85,7 +85,7 @@ OPENAI_API_KEY=your-openai-api-key
 APP_SECRET_KEY=your-secret-key
 ```
 
-> 🔒 **Alternatively**, if you're not using a `.env` file, you can directly include the OpenAI key in your code (for local testing only):
+> **Alternatively**, if you're not using a `.env` file, you can directly include the OpenAI key in your code (for local testing only):
 
 ```python
 from openai import OpenAI
@@ -100,7 +100,7 @@ python wsgi.py
 
 ---
 
-## 🎯 Usage
+## Usage
 
 1. Upload the resume file (PDF or DOCX) using the file upload section.
 2. Provide the job description (JD) in the input field.
@@ -117,16 +117,16 @@ python wsgi.py
 
 ---
 
-## 🤖 OpenAI API Integration (for AI Assistant)
+## OpenAI API Integration (for AI Assistant)
 
 This section enables the AI Assistant chat feature powered by OpenAI's GPT model.
 
-### 🔐 1. Get Your OpenAI API Key
+### 1. Get Your OpenAI API Key
 
 * Visit [https://platform.openai.com/account/api-keys](https://platform.openai.com/account/api-keys)
 * Log in and generate a new API key
 
-### 🗂️ 2. Add Key to Code or `.env`
+### 2. Add Key to Code or `.env`
 
 #### Option A: Environment File (Recommended)
 
@@ -141,12 +141,12 @@ from openai import OpenAI
 client = OpenAI(api_key="your-openai-api-key")
 ```
 
-### 🧠 3. How It Works
+### 3. How It Works
 
 * The `/ai-chat` Flask route sends your question to OpenAI’s GPT (e.g., `gpt-3.5-turbo`)
 * Returns a contextual response to power your in-app AI assistant
 
-### 📦 4. Requirements
+### 4. Requirements
 
 Make sure `openai` is included in your `requirements.txt`:
 
@@ -160,30 +160,30 @@ Install it manually if not:
 pip install openai
 ```
 
-### 🧪 5. Test It
+### 5. Test It
 
 Ask a question using the assistant on the frontend (bottom-right chat bubble).
 You should see an intelligent reply generated from your query.
 
 ---
 
-## 🌐 API Integration
+## API Integration
 
 * Cohere API is used to analyze the resume and JD text.
 * The system checks the presence of JD keywords in the resume and calculates a match score.
 * This allows recruiters to efficiently filter out the most suitable candidates.
 
 ---
-## 📌 Future Enhancements
+## Future Enhancements
 
-* 📈 Candidate trend line chart
-* 📄 Export candidate data as CSV
-* 🔔 Notification triggers for high matches
-* 🌐 Cloud-based deployment (Render, Vercel, etc.)
+* Candidate trend line chart
+* Export candidate data as CSV
+* Notification triggers for high matches
+* Cloud-based deployment (Render, Vercel, etc.)
 
 ---
 
-## 🧠 Credits
+## Credits
 
-Created with ❤️ by Shivayokeshwari
+Created by Shivayokeshwari
 Inspired by the need for smarter, fairer, faster hiring decisions.
